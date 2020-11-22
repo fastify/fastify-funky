@@ -1,0 +1,40 @@
+{
+  "name": "fastify-functional-response",
+  "description": "Support for fastify routes returning functional structures, such as Maybe or Either",
+  "version": "1.0.0",
+  "maintainers": [
+    {
+      "name": "Igor Savin",
+      "email": "kibertoad@gmail.com"
+    }
+  ],
+  "main": "index.js",
+  "types": "index.d.ts",
+  "scripts": {
+    "test": "jest --config=jest.config.json",
+    "test:coverage": "jest --config=jest.config.json --coverage",
+    "test:ci": "npm run lint && npm run test:typescript && npm run test:coverage",
+    "test:typescript": "tsd",
+    "lint": "eslint --format codeframe \"lib/**/*.js\" \"test/**/*.js\" index.js",
+    "prettier": "prettier --write \"{lib,test}/**/*.js\" index.js index.d.ts"
+  },
+  "dependencies": {
+    "fastify-plugin": "^3.0.0"
+  },
+  "peerDependencies": {
+    "fastify": "^3.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^14.14.9",
+    "fastify": "^3.8.0",
+    "eslint": "^7.14.0",
+    "eslint-config-prettier": "^6.15.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "fp-ts": "^2.8.6",
+    "jest": "^26.6.3",
+    "prettier": "^2.2.0",
+    "superagent": "^6.1.0",
+    "tsd": "^0.13.1",
+    "typescript": "4.1.2"
+  }
+}
