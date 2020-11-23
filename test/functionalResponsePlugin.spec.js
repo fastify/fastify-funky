@@ -1,5 +1,5 @@
 const { initAppGet } = require('./internal/appInitializer')
-const { either, task } = require('fp-ts')
+const { either, task, taskEither } = require('fp-ts')
 
 const DUMMY_USER = {
   user: {
@@ -121,6 +121,41 @@ describe('functionalResponsePlugin', () => {
 
       app = await initAppGet(route).ready()
       await assertCorrectResponse(app)
+    })
+  })
+
+  describe('taskEither', () => {
+    it('correctly parses TaskEither result (Either right)', async () => {
+      expect.assertions(2)
+
+      const route = (_req, _reply) => {
+        return taskEither.fromEither(either.right(DUMMY_USER))
+      }
+
+      app = await initAppGet(route).ready()
+      await assertCorrectResponse(app)
+    })
+
+    it('correctly parses TaskEither result (Task)', async () => {
+      expect.assertions(2)
+
+      const route = (_req, _reply) => {
+        return taskEither.fromTask(task.of(Promise.resolve(DUMMY_USER)))
+      }
+
+      app = await initAppGet(route).ready()
+      await assertCorrectResponse(app)
+    })
+
+    it('correctly parses TaskEither result (Either left)', async () => {
+      expect.assertions(3)
+
+      const route = (_req, _reply) => {
+        return taskEither.fromEither(either.left(new Error('Invalid state')))
+      }
+
+      app = await initAppGet(route).ready()
+      await assertErrorResponse(app)
     })
   })
 })
