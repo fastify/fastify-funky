@@ -1,6 +1,6 @@
 {
   "name": "fastify-functional-response",
-  "description": "Support for fastify routes returning functional structures, such as Maybe or Either",
+  "description": "Support for fastify routes returning functional structures, such as fp-ts Either, Task or plain javascript parameterless functions",
   "version": "1.0.0",
   "maintainers": [
     {
