@@ -1,5 +1,5 @@
 # fastify-functional-response
-Support for fastify routes returning functional structures, such as Maybe or Either
+Support for fastify routes returning functional structures, such as fp-ts Either, Task or plain javascript parameterless functions.
 
 ## Getting started
 
