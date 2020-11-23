@@ -1,5 +1,5 @@
-import { FastifyPlugin, FastifyRequest } from 'fastify'
+import { FastifyPlugin } from "fastify";
 
-declare const fastifyFunctionalResponsePlugin: FastifyPlugin
+declare const fastifyFunctionalResponsePlugin: FastifyPlugin;
 
-export { fastifyFunctionalResponsePlugin }
+export { fastifyFunctionalResponsePlugin };

@@ -1,5 +1,35 @@
 const { initAppGet } = require("./internal/appInitializer");
-const { either } = require("fp-ts");
+const { either, task } = require("fp-ts");
+
+const DUMMY_USER = {
+  user: {
+    id: 1,
+  },
+};
+
+function assertCorrectResponse(app) {
+  return app
+    .inject()
+    .get("/")
+    .end()
+    .then((response) => {
+      expect(response.statusCode).toEqual(200);
+      expect(response.json().user).toEqual({ id: 1 });
+    });
+}
+
+function assertErrorResponse(app) {
+  return app
+    .inject()
+    .get("/")
+    .end()
+    .then((response) => {
+      expect(response.statusCode).toEqual(500);
+      expect(response.json()).toEqual({
+        ok: false,
+      });
+    });
+}
 
 describe("functionalResponsePlugin", () => {
   let app;
@@ -7,56 +37,90 @@ describe("functionalResponsePlugin", () => {
     return app.close();
   });
 
-  it("correctly parses right part of Either", () => {
-    expect.assertions(2);
+  describe("either", () => {
+    it("correctly parses right part of Either (sync)", async () => {
+      expect.assertions(2);
 
-    const route = (_req, _reply) => {
-      const payload = either.right({
-        user: {
-          id: 1,
-        },
-      });
+      const route = (_req, _reply) => {
+        return either.right(DUMMY_USER);
+      };
 
-      return Promise.resolve(payload);
-    };
+      app = await initAppGet(route).ready();
+      await assertCorrectResponse(app);
+    });
 
-    return initAppGet(route)
-      .ready()
-      .then((_app) => {
-        app = _app;
-        return app
-          .inject()
-          .get("/")
-          .end()
-          .then((response) => {
-            expect(response.statusCode).toEqual(200);
-            expect(response.json().user).toEqual({ id: 1 });
-          });
-      });
+    it("correctly parses right part of Either (async)", async () => {
+      expect.assertions(2);
+
+      const route = (_req, _reply) => {
+        const payload = either.right(DUMMY_USER);
+        return Promise.resolve(payload);
+      };
+
+      app = await initAppGet(route).ready();
+      await assertCorrectResponse(app);
+    });
+
+    it("correctly parses left part of Either when resolved (async)", async () => {
+      expect.assertions(3);
+
+      const route = (_req, _reply) => {
+        const payload = either.left(new Error("Invalid state"));
+        return Promise.resolve(payload);
+      };
+
+      app = await initAppGet(route).ready();
+      await assertErrorResponse(app);
+    });
+
+    it("correctly parses left part of Either when resolved (sync)", async () => {
+      expect.assertions(3);
+
+      const route = (_req, _reply) => {
+        return either.left(new Error("Invalid state"));
+      };
+
+      app = await initAppGet(route).ready();
+      await assertErrorResponse(app);
+    });
   });
 
-  it("correctly parses left part of Either when resolved", () => {
-    expect.assertions(3);
+  describe("task", () => {
+    it("correctly parses Task result (sync)", async () => {
+      expect.assertions(2);
 
-    const route = (_req, _reply) => {
-      const payload = either.left(new Error("Invalid state"));
-      return Promise.resolve(payload);
-    };
+      const route = (_req, _reply) => {
+        return task.of(DUMMY_USER);
+      };
 
-    return initAppGet(route)
-      .ready()
-      .then((_app) => {
-        app = _app;
-        return app
-          .inject()
-          .get("/")
-          .end()
-          .then((response) => {
-            expect(response.statusCode).toEqual(500);
-            expect(response.json()).toEqual({
-              ok: false,
-            });
-          });
-      });
+      app = await initAppGet(route).ready();
+      await assertCorrectResponse(app);
+    });
+
+    it("correctly parses Task result (promise)", async () => {
+      expect.assertions(2);
+
+      const route = (_req, _reply) => {
+        return task.of(Promise.resolve(DUMMY_USER));
+      };
+
+      app = await initAppGet(route).ready();
+      await assertCorrectResponse(app);
+    });
+
+    it("correctly parses result of a plain parameterless function", async () => {
+      expect.assertions(2);
+
+      const route = (_req, _reply) => {
+        const payload = () => {
+          return DUMMY_USER;
+        };
+
+        return payload;
+      };
+
+      app = await initAppGet(route).ready();
+      await assertCorrectResponse(app);
+    });
   });
 });
