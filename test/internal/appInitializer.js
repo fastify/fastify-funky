@@ -1,23 +1,21 @@
-const fastify = require("fastify");
-const {
-  fastifyFunctionalResponsePlugin,
-} = require("../../lib/functionalResponsePlugin");
+const fastify = require('fastify')
+const { fastifyFunctionalResponse } = require('../../')
 
 function initAppGet(endpoint) {
-  const app = fastify({ logger: true });
-  app.register(fastifyFunctionalResponsePlugin);
+  const app = fastify({ logger: true })
+  app.register(fastifyFunctionalResponse)
 
-  app.get("/", endpoint);
+  app.get('/', endpoint)
 
   app.setErrorHandler((error, request, reply) => {
-    app.log.error(error);
-    expect(error.message).toEqual("Invalid state");
-    reply.status(500).send({ ok: false });
-  });
+    app.log.error(error)
+    expect(error.message).toEqual('Invalid state')
+    reply.status(500).send({ ok: false })
+  })
 
-  return app;
+  return app
 }
 
 module.exports = {
   initAppGet,
-};
+}
