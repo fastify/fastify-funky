@@ -30,6 +30,9 @@ app.get('/', (req, reply) => {
   // Same as above
   return task.of(Promise.resolve({ id: 1}))
 
+  // Same as above
+  return () => { return { id: 1} } 
+
   // This will propagate to fastify error handler, which by default will return 500: Internal server error
   return either.left(new Error('Invalid state'))
 });
