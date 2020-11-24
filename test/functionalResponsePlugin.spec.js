@@ -83,6 +83,21 @@ describe('functionalResponsePlugin', () => {
       app = await initAppGet(route).ready()
       await assertErrorResponse(app)
     })
+
+    it('supports reply callback with the right part of Either', async () => {
+      expect.assertions(2)
+
+      const route = (_req, reply) => {
+        const payload = either.right(DUMMY_USER)
+        Promise.resolve(payload).then((result) => {
+          reply.send(result)
+        })
+        return reply
+      }
+
+      app = await initAppGet(route).ready()
+      await assertCorrectResponse(app)
+    })
   })
 
   describe('task', () => {
