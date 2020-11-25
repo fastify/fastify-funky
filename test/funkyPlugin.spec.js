@@ -31,7 +31,7 @@ function assertErrorResponse(app) {
     })
 }
 
-describe('functionalResponsePlugin', () => {
+describe('fastifyFunky', () => {
   let app
   afterEach(() => {
     return app.close()

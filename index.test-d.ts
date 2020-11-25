@@ -2,29 +2,29 @@ import { FastifyInstance, FastifyPluginCallback } from "fastify";
 import fastify from "fastify";
 import { expectType } from "tsd";
 
-import { fastifyFunctionalResponse as fastifyFunctionalResponseNamed } from "./";
-import fastifyFunctionalResponseDefault from "./";
-import * as fastifyFunctionalResponseStar from "./";
-import fastifyFunctionalResponseCjsImport = require("./");
-const fastifyFunctionalResponseCjs = require("./");
+import { fastifyFunky as fastifyFunkyNamed } from "./";
+import fastifyFunkyDefault from "./";
+import * as fastifyFunkyStar from "./";
+import fastifyFunkyCjsImport = require("./");
+const fastifyFunkyCjs = require("./");
 
 const app: FastifyInstance = fastify();
-app.register(fastifyFunctionalResponseNamed);
-app.register(fastifyFunctionalResponseDefault);
-app.register(fastifyFunctionalResponseCjs);
-app.register(fastifyFunctionalResponseCjsImport.default);
-app.register(fastifyFunctionalResponseCjsImport.fastifyFunctionalResponse);
-app.register(fastifyFunctionalResponseStar.default);
-app.register(fastifyFunctionalResponseStar.fastifyFunctionalResponse);
+app.register(fastifyFunkyNamed);
+app.register(fastifyFunkyDefault);
+app.register(fastifyFunkyCjs);
+app.register(fastifyFunkyCjsImport.default);
+app.register(fastifyFunkyCjsImport.fastifyFunky);
+app.register(fastifyFunkyStar.default);
+app.register(fastifyFunkyStar.fastifyFunky);
 
-expectType<FastifyPluginCallback>(fastifyFunctionalResponseNamed);
-expectType<FastifyPluginCallback>(fastifyFunctionalResponseDefault);
-expectType<FastifyPluginCallback>(fastifyFunctionalResponseCjsImport.default);
+expectType<FastifyPluginCallback>(fastifyFunkyNamed);
+expectType<FastifyPluginCallback>(fastifyFunkyDefault);
+expectType<FastifyPluginCallback>(fastifyFunkyCjsImport.default);
 expectType<FastifyPluginCallback>(
-  fastifyFunctionalResponseCjsImport.fastifyFunctionalResponse
+  fastifyFunkyCjsImport.fastifyFunky
 );
-expectType<FastifyPluginCallback>(fastifyFunctionalResponseStar.default);
+expectType<FastifyPluginCallback>(fastifyFunkyStar.default);
 expectType<FastifyPluginCallback>(
-  fastifyFunctionalResponseStar.fastifyFunctionalResponse
+  fastifyFunkyStar.fastifyFunky
 );
-expectType<any>(fastifyFunctionalResponseCjs);
+expectType<any>(fastifyFunkyCjs);

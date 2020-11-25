@@ -1,6 +1,6 @@
 import { FastifyPluginCallback } from 'fastify'
 
-declare const fastifyFunctionalResponse: FastifyPluginCallback
+declare const fastifyFunky: FastifyPluginCallback
 
-export default fastifyFunctionalResponse
-export { fastifyFunctionalResponse }
+export default fastifyFunky
+export { fastifyFunky }

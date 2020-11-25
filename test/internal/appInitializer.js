@@ -1,9 +1,9 @@
 const fastify = require('fastify')
-const { fastifyFunctionalResponse } = require('../../')
+const { fastifyFunky } = require('../../')
 
 function initAppGet(endpoint) {
   const app = fastify({ logger: true })
-  app.register(fastifyFunctionalResponse)
+  app.register(fastifyFunky)
 
   app.get('/', endpoint)
 

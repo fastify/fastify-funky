@@ -1,24 +1,26 @@
-# fastify-functional-response
+# fastify-funky
+
 Support for fastify routes returning functional structures, such as fp-ts Either, Task, TaskEither or plain javascript parameterless functions.
+Let's go funky, let's go functional!
 
 ## Getting started
 
 First install the package:
 
 ```bash
-npm i fastify-functional-response
+npm i fastify-funky
 ```
 
 Next, set up the plugin:
 
 ```js
-const { fastifyFunctionalResponse } = require('fastify-functional-response')
+const { fastifyFunky } = require('fastify-funky')
 const fastify = require('fastify');
 
-fastify.register(fastifyFunctionalResponse);
+fastify.register(fastifyFunky);
 ``` 
 
-With plugin registered, you can start returning entities of type Either, Task or plain parameterless functions as router method results:
+With the plugin registered, you can start returning entities of type Either, Task or plain parameterless functions as router method results:
 
 ```js
 const { either, task, taskEither } = require('fp-ts')
