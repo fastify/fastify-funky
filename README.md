@@ -1,6 +1,6 @@
 # fastify-funky
 
-Support for fastify routes returning functional structures, such as fp-ts Either, Task, TaskEither or plain javascript parameterless functions.
+Support for fastify routes returning functional structures, such as `fp-ts` Either, Task, TaskEither or plain JavaScript parameterless functions.
 Let's go funky, let's go functional!
 
 ## Getting started
