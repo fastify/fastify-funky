@@ -1,5 +1,8 @@
 # fastify-funky
 
+[![NPM Version][npm-image]][npm-url]
+[![Build Status](https://github.com/fastify/fastify-funky/workflows/ci/badge.svg)](https://github.com/fastify/fastify-funky/actions)
+
 Support for fastify routes returning functional structures, such as `fp-ts` Either, Task, TaskEither or plain JavaScript parameterless functions.
 Let's go funky, let's go functional!
 
@@ -112,3 +115,8 @@ app.get('/', (req, reply) => {
   return taskEither.fromEither(either.left(new Error('Invalid state')))
 });
 ```
+
+[npm-image]: https://img.shields.io/npm/v/fastify-funky.svg
+[npm-url]: https://npmjs.org/package/fastify-funky
+[downloads-image]: https://img.shields.io/npm/dm/fastify-funky.svg
+[downloads-url]: https://npmjs.org/package/fastify-funky
