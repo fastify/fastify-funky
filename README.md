@@ -20,13 +20,77 @@ const fastify = require('fastify');
 fastify.register(fastifyFunky);
 ``` 
 
+`fastify-funky` plugin is executed during `preSerialization` response lifecycle phase.
+
+## Supported structures
+
+While the most convenient way to use this plugin is with `fp-ts` library, it is not required.
+`fastify-funky` supports following data structures:
+
+### Parameterless functions:
+
+```js
+app.get('/', (req, reply) => {
+  // This will result in a response 200: { id: 1}
+  return () => { return { id: 1} }
+  
+  // Same as above
+  return () => { return { right:
+  { id: 1 }
+  }}
+
+  // Same as above
+  return () => { return Promise.resolve({ id: 1 })}
+
+  // Same as above
+  return () => { return Promise.resolve({ right:
+      { id: 1 }
+  })}
+
+  // Plugin will pass-through this value without doing anything
+  return (id) => { return Promise.resolve({ id })}
+});
+```
+
+If function returns `Either` object, it will be handled in the same way as if you returned that `Either` object directly.  
+
+If function returns Promise, it will be resolved. If Promise resolves to an `Either` object, it will be handled in the same way as if you returned that `Either` object directly.   
+
+If function directly returns anything else, or if its Promise resolves to anything else, that result is passed further along the chain as the plugin execution result. 
+
+Note that functions with parameters will be ignored by the plugin and passed-through as-is.
+
+### `Either` objects:
+
+Right value is passed further along the chain as the plugin execution result:
+
+```js
+app.get('/', (req, reply) => {
+  // This will result in a response 200: { id: 1}
+  return { right: 
+           { id: 1 }
+         } 
+});
+```
+
+Left value is passed to the error handler:
+
+```js
+app.get('/', (req, reply) => {
+  // This will propagate to fastify error handler, which by default will result in a response 500: Internal server error
+  return { left: new Error('Invalid state') } 
+});
+```
+
+## Using with fp-ts
+
 With the plugin registered, you can start returning entities of type Either, Task or plain parameterless functions as router method results:
 
 ```js
 const { either, task, taskEither } = require('fp-ts')
 
 app.get('/', (req, reply) => {
-  // This will return 200: { id: 1}
+  // This will result in a response 200: { id: 1}
   return either.right({ id: 1})
 
   // Same as above
@@ -41,7 +105,7 @@ app.get('/', (req, reply) => {
   // Same as above
   return () => { return { id: 1} } 
 
-  // This will propagate to fastify error handler, which by default will return 500: Internal server error
+  // This will propagate to fastify error handler, which by default will result in a response 500: Internal server error
   return either.left(new Error('Invalid state'))
 
   // Same as above

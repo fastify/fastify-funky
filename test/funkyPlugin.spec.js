@@ -18,6 +18,17 @@ function assertCorrectResponse(app) {
     })
 }
 
+function assertCorrectResponseBody(app, expectedBody) {
+  return app
+    .inject()
+    .get('/')
+    .end()
+    .then((response) => {
+      expect(response.statusCode).toEqual(200)
+      expect(response.body).toEqual(expectedBody)
+    })
+}
+
 function assertErrorResponse(app) {
   return app
     .inject()
@@ -35,6 +46,19 @@ describe('fastifyFunky', () => {
   let app
   afterEach(() => {
     return app.close()
+  })
+
+  describe('Promise', () => {
+    it('Correctly handles top-level promise', async () => {
+      expect.assertions(2)
+
+      const route = (_req, _reply) => {
+        return Promise.resolve(either.right(DUMMY_USER))
+      }
+
+      app = await initAppGet(route).ready()
+      await assertCorrectResponse(app)
+    })
   })
 
   describe('either', () => {
@@ -136,6 +160,36 @@ describe('fastifyFunky', () => {
 
       app = await initAppGet(route).ready()
       await assertCorrectResponse(app)
+    })
+
+    it('correctly parses result of a plain parameterless function that returns Either', async () => {
+      expect.assertions(2)
+
+      const route = (_req, _reply) => {
+        const payload = () => {
+          return { right: DUMMY_USER }
+        }
+
+        return payload
+      }
+
+      app = await initAppGet(route).ready()
+      await assertCorrectResponse(app)
+    })
+
+    it('ignores parameterless function with parameters', async () => {
+      expect.assertions(2)
+
+      const route = (_req, _reply) => {
+        const payload = (user) => {
+          return user
+        }
+
+        return payload
+      }
+
+      app = await initAppGet(route).ready()
+      await assertCorrectResponseBody(app, '')
     })
   })
 
