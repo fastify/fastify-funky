@@ -40,10 +40,10 @@
   "engines": {
     "node": ">=10.16.0"
   },
-  "homepage": "https://github.com/kibertoad/fastify-funky",
+  "homepage": "https://github.com/fastify/fastify-funky",
   "repository": {
     "type": "git",
-    "url": "git://github.com/kibertoad/fastify-funky.git"
+    "url": "git://github.com/fastify/fastify-funky.git"
   },
   "keywords": [
     "fastify",
