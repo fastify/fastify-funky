@@ -18,13 +18,13 @@ function assertCorrectResponse(app) {
     })
 }
 
-function assertCorrectResponseBody(app, expectedBody) {
+function assertCorrectResponseBody(app, expectedBody, expectedCode = 200) {
   return app
     .inject()
     .get('/')
     .end()
     .then((response) => {
-      expect(response.statusCode).toEqual(200)
+      expect(response.statusCode).toEqual(expectedCode)
       expect(response.body).toEqual(expectedBody)
     })
 }
@@ -205,6 +205,17 @@ describe('fastifyFunky', () => {
 
       app = await initAppGet(route).ready()
       await assertCorrectResponseBody(app, '')
+    })
+
+    it('handles empty body correctly', async () => {
+      expect.assertions(2)
+
+      const route = (_req, reply) => {
+        reply.code(204).send()
+      }
+
+      app = await initAppGet(route).ready()
+      await assertCorrectResponseBody(app, '', 204)
     })
   })
 
