@@ -147,6 +147,21 @@ describe('fastifyFunky', () => {
       await assertCorrectResponse(app)
     })
 
+    it('correctly handles Task throwing', async () => {
+      expect.assertions(3)
+
+      const route = (_req, _reply) => {
+        return () => {
+          return Promise.resolve().then(() => {
+            throw new Error('Invalid state')
+          })
+        }
+      }
+
+      app = await initAppGet(route).ready()
+      await assertErrorResponse(app)
+    })
+
     it('correctly parses result of a plain parameterless function', async () => {
       expect.assertions(2)
 
