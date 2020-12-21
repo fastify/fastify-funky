@@ -17,7 +17,10 @@
     "test:ci": "npm run lint && npm run test:typescript && npm run test:coverage",
     "test:typescript": "tsd",
     "lint": "eslint --format codeframe \"lib/**/*.js\" \"test/**/*.js\" index.js",
-    "prettier": "prettier --write \"{lib,test}/**/*.js\" index.js index.d.ts"
+    "prettier": "prettier --write \"{lib,test}/**/*.js\" index.js index.d.ts",
+    "postinstall": "husky install",
+    "prepublishOnly": "pinst --disable",
+    "postpublish": "pinst --enable"
   },
   "dependencies": {
     "fastify-plugin": "^3.0.0"
@@ -26,16 +29,18 @@
     "fastify": "^3.0.0"
   },
   "devDependencies": {
-    "@types/node": "^14.14.11",
-    "fastify": "^3.9.1",
-    "eslint": "^7.15.0",
-    "eslint-config-prettier": "^7.0.0",
-    "eslint-plugin-prettier": "^3.2.0",
+    "@types/node": "^14.14.14",
+    "fastify": "^3.9.2",
+    "eslint": "^7.16.0",
+    "eslint-config-prettier": "^7.1.0",
+    "eslint-plugin-prettier": "^3.3.0",
+    "husky": "^5.0.6",
     "fp-ts": "^2.9.1",
     "jest": "^26.6.3",
+    "pinst": "^2.1.1",
     "prettier": "^2.2.1",
     "tsd": "^0.14.0",
-    "typescript": "4.1.2"
+    "typescript": "4.1.3"
   },
   "engines": {
     "node": ">=10.16.0"
