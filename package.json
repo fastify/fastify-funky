@@ -29,7 +29,7 @@
     "@types/node": "^14.14.11",
     "fastify": "^3.9.1",
     "eslint": "^7.15.0",
-    "eslint-config-prettier": "^7.0.0",
+    "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-prettier": "^3.2.0",
     "fp-ts": "^2.9.1",
     "jest": "^26.6.3",
