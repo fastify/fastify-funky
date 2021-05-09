@@ -29,18 +29,18 @@
     "fastify": "^3.0.0"
   },
   "devDependencies": {
-    "@types/node": "^14.14.14",
-    "fastify": "^3.9.2",
-    "eslint": "^7.16.0",
-    "eslint-config-prettier": "^7.1.0",
-    "eslint-plugin-prettier": "^3.3.0",
+    "@types/node": "^14.14.44",
+    "fastify": "^3.15.1",
+    "eslint": "^7.26.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "fp-ts": "^2.10.5",
     "husky": "^5.0.6",
-    "fp-ts": "^2.9.1",
     "jest": "^26.6.3",
     "pinst": "^2.1.1",
     "prettier": "^2.2.1",
     "tsd": "^0.14.0",
-    "typescript": "4.1.3"
+    "typescript": "4.2.4"
   },
   "engines": {
     "node": ">=10.16.0"
