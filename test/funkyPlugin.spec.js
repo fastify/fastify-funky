@@ -1,10 +1,17 @@
-const { initAppGet } = require('./internal/appInitializer')
+const fastify = require('fastify')
 const { either, task, taskEither } = require('fp-ts')
+const { initAppGet } = require('./internal/appInitializer')
+const { fastifyFunky } = require('../')
 
 const DUMMY_USER = {
   user: {
     id: 1,
   },
+}
+
+async function assertResponseType(app, endpoint, expectedType) {
+  const response = await app.inject().get(endpoint).end()
+  expect(response.headers['content-type']).toEqual(expectedType)
 }
 
 function assertCorrectResponse(app) {
@@ -216,6 +223,35 @@ describe('fastifyFunky', () => {
 
       app = await initAppGet(route).ready()
       await assertCorrectResponseBody(app, '', 204)
+    })
+  })
+
+  describe('text content', () => {
+    it('correctly handles text response', async () => {
+      const text = 'text'
+      const obj = { json: true }
+
+      const server = fastify().register(fastifyFunky)
+      app = server
+
+      server.get('/simple-json', async () => obj)
+      server.get('/simple-text', async () => text)
+      server.get('/task-json', async () => task.of(obj))
+      server.get('/task-text', async () => task.of(text))
+      server.get('/either-json', async () => either.of(obj))
+      server.get('/either-text', async () => either.of(text))
+      server.get('/taskeither-json', async () => taskEither.of(obj))
+      server.get('/taskeither-text', async () => taskEither.of(text))
+
+      await server.listen(3000)
+      await assertResponseType(server, '/simple-json', 'application/json; charset=utf-8')
+      await assertResponseType(server, '/simple-text', 'text/plain; charset=utf-8')
+      await assertResponseType(server, '/task-json', 'application/json; charset=utf-8')
+      await assertResponseType(server, '/task-text', 'text/plain; charset=utf-8')
+      await assertResponseType(server, '/either-json', 'application/json; charset=utf-8')
+      await assertResponseType(server, '/either-text', 'text/plain; charset=utf-8')
+      await assertResponseType(server, '/taskeither-json', 'application/json; charset=utf-8')
+      await assertResponseType(server, '/taskeither-text', 'text/plain; charset=utf-8')
     })
   })
 
