@@ -244,14 +244,15 @@ describe('fastifyFunky', () => {
       server.get('/taskeither-text', async () => taskEither.of(text))
 
       await server.listen(3000)
-      await assertResponseType(server, '/simple-json', 'application/json; charset=utf-8')
-      await assertResponseType(server, '/simple-text', 'text/plain; charset=utf-8')
-      await assertResponseType(server, '/task-json', 'application/json; charset=utf-8')
-      await assertResponseType(server, '/task-text', 'text/plain; charset=utf-8')
-      await assertResponseType(server, '/either-json', 'application/json; charset=utf-8')
-      await assertResponseType(server, '/either-text', 'text/plain; charset=utf-8')
-      await assertResponseType(server, '/taskeither-json', 'application/json; charset=utf-8')
-      await assertResponseType(server, '/taskeither-text', 'text/plain; charset=utf-8')
+
+      const objStr = JSON.stringify(obj)
+      for (const endpoint of ['/simple-json', '/task-json', '/either-json', '/taskeither-json']) {
+        await assertResponseTypeAndBody(server, endpoint, 'application/json; charset=utf-8', objStr)
+      }
+
+      for (const endpoint of ['/simple-text', '/task-text', '/either-text', '/taskeither-text']) {
+        await assertResponseTypeAndBody(server, endpoint, 'text/plain; charset=utf-8', text)
+      }
     })
   })
 
