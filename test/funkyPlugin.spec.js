@@ -9,11 +9,11 @@ const DUMMY_USER = {
   },
 }
 
-async function assertResponseType(app, endpoint, expectedType) {
+async function assertResponseTypeAndBody(app, endpoint, expectedType, expectedBody) {
   const response = await app.inject().get(endpoint).end()
   expect(response.headers['content-type']).toEqual(expectedType)
+  expect(response.body).toEqual(expectedBody)
 }
-
 function assertCorrectResponse(app) {
   return app
     .inject()
