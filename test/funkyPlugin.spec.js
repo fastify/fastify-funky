@@ -1,5 +1,7 @@
-const { initAppGet } = require('./internal/appInitializer')
+const fastify = require('fastify')
 const { either, task, taskEither } = require('fp-ts')
+const { initAppGet } = require('./internal/appInitializer')
+const { fastifyFunky } = require('../')
 
 const DUMMY_USER = {
   user: {
@@ -7,6 +9,11 @@ const DUMMY_USER = {
   },
 }
 
+async function assertResponseTypeAndBody(app, endpoint, expectedType, expectedBody) {
+  const response = await app.inject().get(endpoint).end()
+  expect(response.headers['content-type']).toEqual(expectedType)
+  expect(response.body).toEqual(expectedBody)
+}
 function assertCorrectResponse(app) {
   return app
     .inject()
@@ -216,6 +223,36 @@ describe('fastifyFunky', () => {
 
       app = await initAppGet(route).ready()
       await assertCorrectResponseBody(app, '', 204)
+    })
+  })
+
+  describe('text content', () => {
+    it('correctly handles text response', async () => {
+      const text = 'text'
+      const obj = { json: true }
+
+      const server = fastify().register(fastifyFunky)
+      app = server
+
+      server.get('/simple-json', async () => obj)
+      server.get('/simple-text', async () => text)
+      server.get('/task-json', async () => task.of(obj))
+      server.get('/task-text', async () => task.of(text))
+      server.get('/either-json', async () => either.of(obj))
+      server.get('/either-text', async () => either.of(text))
+      server.get('/taskeither-json', async () => taskEither.of(obj))
+      server.get('/taskeither-text', async () => taskEither.of(text))
+
+      await server.listen(3000)
+
+      const objStr = JSON.stringify(obj)
+      for (const endpoint of ['/simple-json', '/task-json', '/either-json', '/taskeither-json']) {
+        await assertResponseTypeAndBody(server, endpoint, 'application/json; charset=utf-8', objStr)
+      }
+
+      for (const endpoint of ['/simple-text', '/task-text', '/either-text', '/taskeither-text']) {
+        await assertResponseTypeAndBody(server, endpoint, 'text/plain; charset=utf-8', text)
+      }
     })
   })
 
