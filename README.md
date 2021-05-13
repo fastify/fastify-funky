@@ -2,6 +2,8 @@
 
 [![NPM Version][npm-image]][npm-url]
 [![Build Status](https://github.com/fastify/fastify-funky/workflows/ci/badge.svg)](https://github.com/fastify/fastify-funky/actions)
+[![Known Vulnerabilities](https://snyk.io/test/github/fastify/fastify-funky/badge.svg)](https://snyk.io/test/github/fastify/fastify-funky)
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat)](https://github.com/prettier/prettier)
 
 Support for Fastify routes returning functional structures, such as `fp-ts` Either, Task, TaskEither, or plain JavaScript parameterless functions.
 Let's go funky, let's go functional!
