@@ -3,7 +3,7 @@
 [![NPM Version][npm-image]][npm-url]
 [![Build Status](https://github.com/fastify/fastify-funky/workflows/ci/badge.svg)](https://github.com/fastify/fastify-funky/actions)
 
-Support for fastify routes returning functional structures, such as `fp-ts` Either, Task, TaskEither or plain JavaScript parameterless functions.
+Support for Fastify routes returning functional structures, such as `fp-ts` Either, Task, TaskEither, or plain JavaScript parameterless functions.
 Let's go funky, let's go functional!
 
 ## Getting started
@@ -28,7 +28,7 @@ fastify.register(fastifyFunky);
 ## Supported structures
 
 While the most convenient way to use this plugin is with `fp-ts` library, it is not required.
-`fastify-funky` supports following data structures:
+`fastify-funky` supports the following data structures:
 
 ### Parameterless functions:
 
@@ -55,11 +55,11 @@ app.get('/', (req, reply) => {
 });
 ```
 
-If function returns `Either` object, it will be handled in the same way as if you returned that `Either` object directly.  
+If the function returns an `Either` object, it will be handled in the same way as if you returned that `Either` object directly.  
 
-If function returns Promise, it will be resolved. If Promise resolves to an `Either` object, it will be handled in the same way as if you returned that `Either` object directly.   
+If the function returns a Promise, it will be resolved. If Promise resolves to an `Either` object, it will be handled in the same way as if you returned that `Either` object directly.   
 
-If function directly returns anything else, or if its Promise resolves to anything else, that result is passed further along the chain as the plugin execution result. 
+If the function directly returns anything else, or if its Promise resolves to anything else, that result is passed further along the chain as the plugin execution result. 
 
 Note that functions with parameters will be ignored by the plugin and passed-through as-is.
 
@@ -87,7 +87,7 @@ app.get('/', (req, reply) => {
 
 ## Using with fp-ts
 
-With the plugin registered, you can start returning entities of type Either, Task or plain parameterless functions as router method results:
+With the plugin registered, you can start returning entities of type Either, Task, or plain parameterless functions as router method results:
 
 ```js
 const { either, task, taskEither } = require('fp-ts')
