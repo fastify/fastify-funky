@@ -36,3 +36,11 @@ app.get('/func', (req: FastifyRequest, reply: FastifyReply) => {
     return { right: { id: 1 } }
   }
 })
+
+app.get('/func', (req: FastifyRequest, reply: FastifyReply) => {
+  return Promise.resolve({})
+})
+
+app.get('/func', (req: FastifyRequest, reply: FastifyReply) => {
+  reply.status(200).send({})
+})

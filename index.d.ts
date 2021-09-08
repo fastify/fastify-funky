@@ -23,7 +23,7 @@ declare module 'fastify' {
       this: FastifyInstance<RawServer, RawRequest, RawReply>,
       request: FastifyRequest<RouteGeneric, RawServer, RawRequest>,
       reply: FastifyReply<RawServer, RawRequest, RawReply, RouteGeneric, ContextConfig>
-    ): Record<string, any> | (() => any)
+    ): void | Promise<RouteGeneric['Reply'] | void> | Record<string, any> | (() => any)
   }
 }
 
