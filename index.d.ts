@@ -23,11 +23,34 @@ declare module 'fastify' {
       this: FastifyInstance<RawServer, RawRequest, RawReply>,
       request: FastifyRequest<RouteGeneric, RawServer, RawRequest>,
       reply: FastifyReply<RawServer, RawRequest, RawReply, RouteGeneric, ContextConfig>
-    ): void | Promise<RouteGeneric['Reply'] | void> | Record<string, any> | (() => any)
+    ): void | Promise<RouteGeneric['Reply'] | void> | FunkyReply<RouteGeneric['Reply']>
   }
 }
 
 declare const fastifyFunky: FastifyPluginCallback
+declare type FunkyReply<T> =
+  | TaskEither<unknown, T>
+  | Either<unknown, T>
+  | Right<T>
+  | Left
+  | Task<T>
+  | (() => FunkyReply<T>)
+
+declare interface Left<E = unknown> {
+  readonly left: E
+}
+
+declare interface Right<A> {
+  readonly right: A
+}
+
+declare type Either<E, A> = Left<E> | Right<A>
+
+declare interface Task<A> {
+  (): Promise<A>
+}
+
+declare interface TaskEither<E, A> extends Task<Either<E, A>> {}
 
 export default fastifyFunky
-export { fastifyFunky }
+export { fastifyFunky, FunkyReply, Left, Right, Either, Task, TaskEither }

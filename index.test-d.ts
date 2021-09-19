@@ -1,6 +1,7 @@
 import { FastifyInstance, FastifyPluginCallback, FastifyReply, FastifyRequest } from 'fastify'
 import fastify from 'fastify'
-import { expectType } from 'tsd'
+import { either, task, taskEither } from 'fp-ts'
+import { expectType, expectError } from 'tsd'
 
 import { fastifyFunky as fastifyFunkyNamed } from './'
 import fastifyFunkyDefault from './'
@@ -44,3 +45,36 @@ app.get('/func', (req: FastifyRequest, reply: FastifyReply) => {
 app.get('/func', (req: FastifyRequest, reply: FastifyReply) => {
   reply.status(200).send({})
 })
+
+// this is allowed
+app.get("/", (req, reply) => {
+  return { right: { id: 1 } };
+});
+app.get("/", (req, reply) => {
+  return { left: new Error('error') };
+});
+app.get("/", (req, reply) => {
+  return taskEither.fromEither(either.left(new Error('Invalid state')))
+});
+app.get("/", (req, reply) => {
+  return taskEither.fromTask(task.of(Promise.resolve({})))
+});
+app.get("/", (req, reply) => {
+  return either.of(Promise.resolve({}))
+});
+app.get("/", (req, reply) => {
+  return task.of(Promise.resolve({}))
+});
+app.get("/", (req, reply) => {
+  return taskEither.of(Promise.resolve({}))
+});
+
+//this will actually work in js, but not encouraged and hence ts will throw an error
+expectError(app.get("/", (req, reply) => {
+  return {}
+}))
+
+// ...but this gives a (correct) type error
+expectError(app.get('/', (req: FastifyRequest, reply: FastifyReply) => {
+  return { rght: { id: 1 } }
+}))
