@@ -30,7 +30,7 @@
   },
   "devDependencies": {
     "@types/node": "^17.0.0",
-    "eslint": "^7.32.0",
+    "eslint": "^8.6.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
     "fastify": "^3.21.3",
