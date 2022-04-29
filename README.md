@@ -1,4 +1,4 @@
-# fastify-funky
+# @fastify/funky
 
 [![NPM Version][npm-image]][npm-url]
 [![Build Status](https://github.com/fastify/fastify-funky/workflows/ci/badge.svg)](https://github.com/fastify/fastify-funky/actions)
@@ -13,24 +13,24 @@ Let's go funky, let's go functional!
 First install the package:
 
 ```bash
-npm i fastify-funky
+npm i @fastify/funky
 ```
 
 Next, set up the plugin:
 
 ```js
-const { fastifyFunky } = require('fastify-funky')
+const { fastifyFunky } = require('@fastify/funky')
 const fastify = require('fastify');
 
 fastify.register(fastifyFunky);
 ``` 
 
-`fastify-funky` plugin is executed during `preSerialization` response lifecycle phase.
+`@fastify/funky` plugin is executed during `preSerialization` response lifecycle phase.
 
 ## Supported structures
 
 While the most convenient way to use this plugin is with `fp-ts` library, it is not required.
-`fastify-funky` supports the following data structures:
+`@fastify/funky` supports the following data structures:
 
 ### Parameterless functions:
 
@@ -118,7 +118,7 @@ app.get('/', (req, reply) => {
 });
 ```
 
-[npm-image]: https://img.shields.io/npm/v/fastify-funky.svg
-[npm-url]: https://npmjs.org/package/fastify-funky
+[npm-image]: https://img.shields.io/npm/v/@fastify/funky.svg
+[npm-url]: https://npmjs.org/package/@fastify/funky
 [downloads-image]: https://img.shields.io/npm/dm/fastify-funky.svg
-[downloads-url]: https://npmjs.org/package/fastify-funky
+[downloads-url]: https://npmjs.org/package/@fastify/funky
