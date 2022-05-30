@@ -12,7 +12,7 @@
   "main": "index.js",
   "types": "index.d.ts",
   "scripts": {
-    "test": "jest --config=jest.config.json",
+    "test": "jest --config=jest.config.json && npm run test:typescript",
     "test:coverage": "jest --config=jest.config.json --coverage",
     "test:ci": "npm run lint && npm run test:typescript && npm run test:coverage",
     "test:typescript": "tsd",
@@ -41,9 +41,6 @@
     "prettier": "^2.4.1",
     "tsd": "^0.20.0",
     "typescript": "4.7.2"
-  },
-  "engines": {
-    "node": ">=10.16.0"
   },
   "homepage": "https://github.com/fastify/fastify-funky",
   "repository": {
