@@ -16,7 +16,7 @@
     "test:coverage": "jest --config=jest.config.json --coverage",
     "test:ci": "npm run lint && npm run test:typescript && npm run test:coverage",
     "test:typescript": "tsd",
-    "lint": "eslint --format codeframe \"lib/**/*.js\" \"test/**/*.js\" index.js",
+    "lint": "eslint \"lib/**/*.js\" \"test/**/*.js\" index.js",
     "prettier": "prettier --write \"{lib,test}/**/*.js\" index.js index.d.ts",
     "postinstall": "husky install",
     "prepublishOnly": "pinst --disable",
@@ -30,7 +30,7 @@
   },
   "devDependencies": {
     "@types/node": "^17.0.0",
-    "eslint": "^7.32.0",
+    "eslint": "^8.16.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
     "fastify": "^3.21.3",
