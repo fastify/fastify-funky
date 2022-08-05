@@ -243,7 +243,7 @@ describe('fastifyFunky', () => {
       server.get('/taskeither-json', async () => taskEither.of(obj))
       server.get('/taskeither-text', async () => taskEither.of(text))
 
-      await server.listen(3000)
+      await server.listen({ port: 3000 })
 
       const objStr = JSON.stringify(obj)
       for (const endpoint of ['/simple-json', '/task-json', '/either-json', '/taskeither-json']) {
