@@ -39,7 +39,7 @@
     "jest": "^29.0.1",
     "pinst": "^3.0.0",
     "prettier": "^2.4.1",
-    "tsd": "^0.20.0"
+    "tsd": "^0.23.0"
   },
   "homepage": "https://github.com/fastify/fastify-funky",
   "repository": {
