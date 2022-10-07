@@ -6,14 +6,14 @@ const {
   assertResponseTypeAndBody,
   assertCorrectResponse,
   assertCorrectResponseBody,
-  assertErrorResponse,
+  assertErrorResponse
 } = require('./helpers')
 const { fastifyFunky } = require('../index')
 
 const DUMMY_USER = {
   user: {
-    id: 1,
-  },
+    id: 1
+  }
 }
 
 test('Promise: Correctly handles top-level promise', async (t) => {

@@ -1,7 +1,7 @@
 const fastify = require('fastify')
 const { fastifyFunky } = require('../index')
 
-function initAppGet(t, endpoint) {
+function initAppGet (t, endpoint) {
   const app = fastify()
   app.register(fastifyFunky)
 
@@ -16,13 +16,13 @@ function initAppGet(t, endpoint) {
   return app
 }
 
-async function assertResponseTypeAndBody(t, app, endpoint, expectedType, expectedBody) {
+async function assertResponseTypeAndBody (t, app, endpoint, expectedType, expectedBody) {
   const response = await app.inject().get(endpoint).end()
   t.strictSame(response.headers['content-type'], expectedType)
   t.strictSame(response.body, expectedBody)
 }
 
-function assertCorrectResponse(t, app) {
+function assertCorrectResponse (t, app) {
   return app
     .inject()
     .get('/')
@@ -33,7 +33,7 @@ function assertCorrectResponse(t, app) {
     })
 }
 
-function assertCorrectResponseBody(t, app, expectedBody, expectedCode = 200) {
+function assertCorrectResponseBody (t, app, expectedBody, expectedCode = 200) {
   return app
     .inject()
     .get('/')
@@ -44,7 +44,7 @@ function assertCorrectResponseBody(t, app, expectedBody, expectedCode = 200) {
     })
 }
 
-function assertErrorResponse(t, app) {
+function assertErrorResponse (t, app) {
   return app
     .inject()
     .get('/')
@@ -52,7 +52,7 @@ function assertErrorResponse(t, app) {
     .then((response) => {
       t.strictSame(response.statusCode, 500)
       t.strictSame(response.json(), {
-        ok: false,
+        ok: false
       })
     })
 }
@@ -62,5 +62,5 @@ module.exports = {
   assertResponseTypeAndBody,
   assertCorrectResponse,
   assertCorrectResponseBody,
-  assertErrorResponse,
+  assertErrorResponse
 }

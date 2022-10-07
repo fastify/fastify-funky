@@ -3,14 +3,14 @@
 const utilTypes = require('util').types
 const fp = require('fastify-plugin')
 
-function resolvePayload(done, err, result, reply) {
+function resolvePayload (done, err, result, reply) {
   if (typeof result === 'string') {
     reply.type('text/plain; charset=utf-8').serializer(String)
   }
   return done(err, result)
 }
 
-function plugin(fastify, opts, next) {
+function plugin (fastify, opts, next) {
   fastify.addHook('preSerialization', (req, res, payload, done) => {
     // Handle Either
     if (isEither(payload)) {
@@ -46,19 +46,19 @@ function plugin(fastify, opts, next) {
   next()
 }
 
-function isEither(payload) {
+function isEither (payload) {
   return payload.left || payload.right
 }
 
-function isPromise(value) {
+function isPromise (value) {
   return utilTypes.isPromise(value)
 }
 
-function isTask(value) {
+function isTask (value) {
   return typeof value === 'function' && value.length === 0
 }
 
 module.exports = fp(plugin, {
   fastify: '4.x',
-  name: '@fastify/funky',
+  name: '@fastify/funky'
 })
