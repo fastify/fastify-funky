@@ -1,3 +1,5 @@
+'use strict'
+
 const fastify = require('fastify')
 const { either, task, taskEither } = require('fp-ts')
 const { test } = require('tap')
