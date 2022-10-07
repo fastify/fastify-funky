@@ -29,9 +29,7 @@ function plugin (fastify, opts, next) {
 
             return resolvePayload(done, null, taskResult, res)
           })
-          .catch((err) => {
-            return done(err)
-          })
+          .catch(done)
         return
       }
       if (isEither(result)) {
