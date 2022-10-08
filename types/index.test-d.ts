@@ -3,10 +3,10 @@ import fastify from 'fastify'
 import { either, task, taskEither } from 'fp-ts'
 import { expectType, expectError } from 'tsd'
 
-import { fastifyFunky as fastifyFunkyNamed } from './'
-import fastifyFunkyDefault from './'
-import * as fastifyFunkyStar from './'
-import fastifyFunkyCjsImport = require('./')
+import { fastifyFunky as fastifyFunkyNamed } from '..'
+import fastifyFunkyDefault from '..'
+import * as fastifyFunkyStar from '..'
+import fastifyFunkyCjsImport = require('..')
 const fastifyFunkyCjs = require('./')
 
 const app: FastifyInstance = fastify()
