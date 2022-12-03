@@ -3,14 +3,7 @@
 const isPromise = require('util').types.isPromise
 const fp = require('fastify-plugin')
 
-function resolvePayload (done, err, result, reply) {
-  if (typeof result === 'string') {
-    reply.type('text/plain; charset=utf-8').serializer(String)
-  }
-  return done(err, result)
-}
-
-function plugin (fastify, opts, next) {
+function fastifyFunky (fastify, opts, next) {
   fastify.addHook('preSerialization', (req, res, payload, done) => {
     // Handle Either
     if (isEither(payload)) {
@@ -44,6 +37,13 @@ function plugin (fastify, opts, next) {
   next()
 }
 
+function resolvePayload (done, err, result, reply) {
+  if (typeof result === 'string') {
+    reply.type('text/plain; charset=utf-8').serializer(String)
+  }
+  return done(err, result)
+}
+
 function isEither (payload) {
   return payload.left || payload.right
 }
@@ -52,7 +52,9 @@ function isTask (value) {
   return typeof value === 'function' && value.length === 0
 }
 
-module.exports = fp(plugin, {
+module.exports = fp(fastifyFunky, {
   fastify: '4.x',
   name: '@fastify/funky'
 })
+module.exports.default = fastifyFunky
+module.exports.fastifyFunky = fastifyFunky
