@@ -1,6 +1,6 @@
 'use strict'
 
-const utilTypes = require('util').types
+const isPromise = require('util').types.isPromise
 const fp = require('fastify-plugin')
 
 function resolvePayload (done, err, result, reply) {
@@ -46,10 +46,6 @@ function plugin (fastify, opts, next) {
 
 function isEither (payload) {
   return payload.left || payload.right
-}
-
-function isPromise (value) {
-  return utilTypes.isPromise(value)
 }
 
 function isTask (value) {
