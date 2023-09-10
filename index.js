@@ -1,6 +1,6 @@
 'use strict'
 
-const isPromise = require('util').types.isPromise
+const isPromise = require('node:util').types.isPromise
 const fp = require('fastify-plugin')
 
 function fastifyFunky (fastify, opts, next) {
