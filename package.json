@@ -29,7 +29,7 @@
     "fastify": "^4.2.0",
     "fp-ts": "^2.11.2",
     "standard": "^17.0.0",
-    "tap": "^16.3.0",
+    "tap": "^18.0.3",
     "tsd": "^0.20.0"
   },
   "homepage": "https://github.com/fastify/fastify-funky",
