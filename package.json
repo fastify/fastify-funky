@@ -1,7 +1,7 @@
 {
   "name": "@fastify/funky",
   "description": "Support for fastify routes returning functional structures, such as fp-ts Either, Task, TaskEither or plain javascript parameterless functions",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "license": "MIT",
   "maintainers": [
     {
