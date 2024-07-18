@@ -53,7 +53,7 @@ function isTask (value) {
 }
 
 module.exports = fp(fastifyFunky, {
-  fastify: '4.x',
+  fastify: '5.x',
   name: '@fastify/funky'
 })
 module.exports.default = fastifyFunky
