@@ -2,7 +2,7 @@
 
 const fastify = require('fastify')
 const { either, task, taskEither } = require('fp-ts')
-const { test } = require('tap')
+const { test } = require('node:test')
 const {
   initAppGet,
   assertResponseTypeAndBody,
@@ -27,7 +27,7 @@ test('Promise: Correctly handles top-level promise', async (t) => {
 
   const app = await initAppGet(t, route).ready()
 
-  t.teardown(() => {
+  t.after(() => {
     app.close()
   })
 
@@ -43,7 +43,7 @@ test('either: correctly parses right part of Either (sync)', async (t) => {
 
   const app = await initAppGet(t, route).ready()
 
-  t.teardown(() => {
+  t.after(() => {
     app.close()
   })
 
@@ -60,7 +60,7 @@ test('either: correctly parses right part of Either (async)', async (t) => {
 
   const app = await initAppGet(t, route).ready()
 
-  t.teardown(() => {
+  t.after(() => {
     app.close()
   })
 
@@ -77,7 +77,7 @@ test('either: correctly parses left part of Either when resolved (async)', async
 
   const app = await initAppGet(t, route).ready()
 
-  t.teardown(() => {
+  t.after(() => {
     app.close()
   })
 
@@ -93,7 +93,7 @@ test('either: correctly parses left part of Either when resolved (sync)', async 
 
   const app = await initAppGet(t, route).ready()
 
-  t.teardown(() => {
+  t.after(() => {
     app.close()
   })
 
@@ -113,7 +113,7 @@ test('either: supports reply callback with the right part of Either', async (t) 
 
   const app = await initAppGet(t, route).ready()
 
-  t.teardown(() => {
+  t.after(() => {
     app.close()
   })
 
@@ -129,7 +129,7 @@ test('task: correctly parses Task result (sync)', async (t) => {
 
   const app = await initAppGet(t, route).ready()
 
-  t.teardown(() => {
+  t.after(() => {
     app.close()
   })
 
@@ -145,7 +145,7 @@ test('task: correctly parses Task result (promise)', async (t) => {
 
   const app = await initAppGet(t, route).ready()
 
-  t.teardown(() => {
+  t.after(() => {
     app.close()
   })
 
@@ -165,7 +165,7 @@ test('task: correctly handles Task throwing', async (t) => {
 
   const app = await initAppGet(t, route).ready()
 
-  t.teardown(() => {
+  t.after(() => {
     app.close()
   })
 
@@ -185,7 +185,7 @@ test('task: correctly parses result of a plain parameterless function', async (t
 
   const app = await initAppGet(t, route).ready()
 
-  t.teardown(() => {
+  t.after(() => {
     app.close()
   })
 
@@ -205,7 +205,7 @@ test('task: correctly parses result of a plain parameterless function that retur
 
   const app = await initAppGet(t, route).ready()
 
-  t.teardown(() => {
+  t.after(() => {
     app.close()
   })
 
@@ -225,7 +225,7 @@ test('task: ignores parameterless function with parameters', async (t) => {
 
   const app = await initAppGet(t, route).ready()
 
-  t.teardown(() => {
+  t.after(() => {
     app.close()
   })
 
@@ -241,7 +241,7 @@ test('task: handles empty body correctly', async (t) => {
 
   const app = await initAppGet(t, route).ready()
 
-  t.teardown(() => {
+  t.after(() => {
     app.close()
   })
 
@@ -256,7 +256,7 @@ test('text content: correctly handles text response', async (t) => {
 
   const app = fastify().register(fastifyFunky)
 
-  t.teardown(() => {
+  t.after(() => {
     app.close()
   })
 
@@ -290,7 +290,7 @@ test('taskEither: correctly parses TaskEither result (Either right)', async (t) 
 
   const app = await initAppGet(t, route).ready()
 
-  t.teardown(() => {
+  t.after(() => {
     app.close()
   })
 
@@ -306,7 +306,7 @@ test('taskEither: correctly parses TaskEither result (Task)', async (t) => {
 
   const app = await initAppGet(t, route).ready()
 
-  t.teardown(() => {
+  t.after(() => {
     app.close()
   })
 
@@ -322,7 +322,7 @@ test('taskEither: correctly parses TaskEither result (Either left)', async (t) =
 
   const app = await initAppGet(t, route).ready()
 
-  t.teardown(() => {
+  t.after(() => {
     app.close()
   })
 
