@@ -11,7 +11,7 @@ function initAppGet (t, endpoint) {
 
   app.setErrorHandler((error, request, reply) => {
     app.log.error(error)
-    t.strictSame(error.message, 'Invalid state')
+    t.assert.deepStrictEqual(error.message, 'Invalid state')
     reply.status(500).send({ ok: false })
   })
 
@@ -20,8 +20,8 @@ function initAppGet (t, endpoint) {
 
 async function assertResponseTypeAndBody (t, app, endpoint, expectedType, expectedBody) {
   const response = await app.inject().get(endpoint).end()
-  t.strictSame(response.headers['content-type'], expectedType)
-  t.strictSame(response.body, expectedBody)
+  t.assert.deepStrictEqual(response.headers['content-type'], expectedType)
+  t.assert.deepStrictEqual(response.body, expectedBody)
 }
 
 function assertCorrectResponse (t, app) {
@@ -30,8 +30,8 @@ function assertCorrectResponse (t, app) {
     .get('/')
     .end()
     .then((response) => {
-      t.strictSame(response.statusCode, 200)
-      t.strictSame(response.json().user, { id: 1 })
+      t.assert.deepStrictEqual(response.statusCode, 200)
+      t.assert.deepStrictEqual(response.json().user, { id: 1 })
     })
 }
 
@@ -41,8 +41,8 @@ function assertCorrectResponseBody (t, app, expectedBody, expectedCode = 200) {
     .get('/')
     .end()
     .then((response) => {
-      t.strictSame(response.statusCode, expectedCode)
-      t.strictSame(response.body, expectedBody)
+      t.assert.deepStrictEqual(response.statusCode, expectedCode)
+      t.assert.deepStrictEqual(response.body, expectedBody)
     })
 }
 
@@ -52,8 +52,8 @@ function assertErrorResponse (t, app) {
     .get('/')
     .end()
     .then((response) => {
-      t.strictSame(response.statusCode, 500)
-      t.strictSame(response.json(), {
+      t.assert.deepStrictEqual(response.statusCode, 500)
+      t.assert.deepStrictEqual(response.json(), {
         ok: false
       })
     })
