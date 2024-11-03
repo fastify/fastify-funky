@@ -22,7 +22,7 @@ const { fastifyFunky } = require('@fastify/funky')
 const fastify = require('fastify');
 
 fastify.register(fastifyFunky);
-``` 
+```
 
 `@fastify/funky` plugin is executed during `preSerialization` response lifecycle phase.
 
@@ -37,7 +37,7 @@ While the most convenient way to use this plugin is with `fp-ts` library, it is 
 app.get('/', (req, reply) => {
   // This will result in a response 200: { id: 1}
   return () => { return { id: 1} }
-  
+
   // Same as above
   return () => { return { right:
   { id: 1 }
@@ -56,11 +56,11 @@ app.get('/', (req, reply) => {
 });
 ```
 
-If the function returns an `Either` object, it will be handled in the same way as if you returned that `Either` object directly.  
+If the function returns an `Either` object, it will be handled in the same way as if you returned that `Either` object directly.
 
-If the function returns a Promise, it will be resolved. If Promise resolves to an `Either` object, it will be handled in the same way as if you returned that `Either` object directly.   
+If the function returns a Promise, it will be resolved. If Promise resolves to an `Either` object, it will be handled in the same way as if you returned that `Either` object directly.
 
-If the function directly returns anything else, or if its Promise resolves to anything else, that result is passed further along the chain as the plugin execution result. 
+If the function directly returns anything else, or if its Promise resolves to anything else, that result is passed further along the chain as the plugin execution result.
 
 Note that functions with parameters will be ignored by the plugin and passed-through as-is.
 
@@ -71,9 +71,9 @@ Right value is passed further along the chain as the plugin execution result:
 ```js
 app.get('/', (req, reply) => {
   // This will result in a response 200: { id: 1}
-  return { right: 
+  return { right:
            { id: 1 }
-         } 
+         }
 });
 ```
 
@@ -82,7 +82,7 @@ Left value is passed to the error handler:
 ```js
 app.get('/', (req, reply) => {
   // This will propagate to fastify error handler, which by default will result in a response 500: Internal server error
-  return { left: new Error('Invalid state') } 
+  return { left: new Error('Invalid state') }
 });
 ```
 
@@ -107,7 +107,7 @@ app.get('/', (req, reply) => {
   return taskEither.fromTask(task.of(Promise.resolve({ id: 1})))
 
   // Same as above
-  return () => { return { id: 1} } 
+  return () => { return { id: 1} }
 
   // This will propagate to fastify error handler, which by default will result in a response 500: Internal server error
   return either.left(new Error('Invalid state'))
