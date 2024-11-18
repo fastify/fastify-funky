@@ -35,6 +35,9 @@
     "type": "git",
     "url": "git://github.com/fastify/fastify-funky.git"
   },
+  "bugs": {
+    "url": "https://github.com/fastify/fastify-funky/issues"
+  },
   "keywords": [
     "fastify",
     "plugin",
