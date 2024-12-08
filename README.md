@@ -2,7 +2,7 @@
 
 [![NPM Version][npm-image]][npm-url]
 [![CI](https://github.com/fastify/fastify-funky/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/fastify/fastify-funky/actions/workflows/ci.yml)
-[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](https://standardjs.com/)
+[![neostandard javascript style](https://img.shields.io/badge/code_style-neostandard-brightgreen?style=flat)](https://github.com/neostandard/neostandard)
 
 Support for Fastify routes returning functional structures, such as `fp-ts` Either, Task, TaskEither, or plain JavaScript parameterless functions.
 Let's go funky, let's go functional!
