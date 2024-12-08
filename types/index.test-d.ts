@@ -53,38 +53,38 @@ app.get('/func', (req, reply) => {
 })
 
 // this is allowed
-app.get("/", (req, reply) => {
+app.get('/', (req, reply) => {
   expectAssignable<FastifyRequest>(req)
   expectAssignable<FastifyReply>(reply)
-  return { right: { id: 1 } };
-});
-app.get("/", (req, reply) => {
+  return { right: { id: 1 } }
+})
+app.get('/', (req, reply) => {
   expectAssignable<FastifyRequest>(req)
   expectAssignable<FastifyReply>(reply)
-  return { left: new Error('error') };
-});
-app.get("/", (req, reply) => {
+  return { left: new Error('error') }
+})
+app.get('/', (req, reply) => {
   expectAssignable<FastifyRequest>(req)
   expectAssignable<FastifyReply>(reply)
   return taskEither.fromEither(either.left(new Error('Invalid state')))
-});
-app.get("/", (req, reply) => {
+})
+app.get('/', (req, reply) => {
   expectAssignable<FastifyRequest>(req)
   expectAssignable<FastifyReply>(reply)
   return taskEither.fromTask(task.of(Promise.resolve({})))
-});
-app.get("/", (req, reply) => {
+})
+app.get('/', (req, reply) => {
   expectAssignable<FastifyRequest>(req)
   expectAssignable<FastifyReply>(reply)
   return either.of(Promise.resolve({}))
-});
-app.get("/", (req, reply) => {
+})
+app.get('/', (req, reply) => {
   expectAssignable<FastifyRequest>(req)
   expectAssignable<FastifyReply>(reply)
   return task.of(Promise.resolve({}))
-});
-app.get("/", (req, reply) => {
+})
+app.get('/', (req, reply) => {
   expectAssignable<FastifyRequest>(req)
   expectAssignable<FastifyReply>(reply)
   return taskEither.of(Promise.resolve({}))
-});
+})
