@@ -1,7 +1,7 @@
 import { FastifyInstance, FastifyPluginCallback, FastifyReply, FastifyRequest } from 'fastify'
 import fastify from 'fastify'
 import { either, task, taskEither } from 'fp-ts'
-import { expectType, expectError, expectAssignable } from 'tsd'
+import { expectType, expectAssignable } from 'tsd'
 
 import { fastifyFunky as fastifyFunkyNamed } from '..'
 import fastifyFunkyDefault from '..'
