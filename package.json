@@ -26,6 +26,7 @@
     "@fastify/pre-commit": "^2.1.0",
     "@types/node": "^22.7.4",
     "c8": "^10.1.2",
+    "eslint": "^9.17.0",
     "fastify": "^5.0.0",
     "fp-ts": "^2.11.2",
     "neostandard": "^0.12.0",
