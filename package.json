@@ -33,6 +33,16 @@
     "tsd": "^0.31.1"
   },
   "homepage": "https://github.com/fastify/fastify-funky",
+  "funding": [
+    {
+      "type": "github",
+      "url": "https://github.com/sponsors/fastify"
+    },
+    {
+      "type": "opencollective",
+      "url": "https://opencollective.com/fastify"
+    }
+  ],
   "repository": {
     "type": "git",
     "url": "git://github.com/fastify/fastify-funky.git"
