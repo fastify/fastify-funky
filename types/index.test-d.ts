@@ -1,5 +1,4 @@
-import { FastifyInstance, FastifyPluginCallback, FastifyReply, FastifyRequest } from 'fastify'
-import fastify from 'fastify'
+import fastify, { FastifyInstance, FastifyPluginCallback, FastifyReply, FastifyRequest } from 'fastify'
 import { either, task, taskEither } from 'fp-ts'
 import { expectType, expectAssignable } from 'tsd'
 
