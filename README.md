@@ -122,6 +122,6 @@ app.get('/', (req, reply) => {
 Licensed under [MIT](./LICENSE).
 
 [npm-image]: https://img.shields.io/npm/v/@fastify/funky.svg
-[npm-url]: https://npmjs.org/package/@fastify/funky
+[npm-url]: https://npmjs.com/package/@fastify/funky
 [downloads-image]: https://img.shields.io/npm/dm/fastify-funky.svg
 [downloads-url]: https://npmjs.org/package/@fastify/funky
