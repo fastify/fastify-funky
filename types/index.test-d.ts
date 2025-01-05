@@ -26,7 +26,7 @@ expectType<any>(fastifyFunkyCjs)
 
 app.register(fastifyFunkyDefault)
 // this gives a type error:
-app.get('/', (req: FastifyRequest, reply: FastifyReply) => {
+app.get('/', (_req: FastifyRequest, _reply: FastifyReply) => {
   return { right: { id: 1 } }
 })
 
