@@ -9,7 +9,7 @@ function initAppGet (t, endpoint) {
 
   app.get('/', endpoint)
 
-  app.setErrorHandler((error, request, reply) => {
+  app.setErrorHandler((error, _request, reply) => {
     app.log.error(error)
     t.assert.deepStrictEqual(error.message, 'Invalid state')
     reply.status(500).send({ ok: false })
