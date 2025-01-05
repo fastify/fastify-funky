@@ -9,7 +9,7 @@ Let's go funky, let's go functional!
 
 ## Getting started
 
-First install the package:
+First, install the package:
 
 ```bash
 npm i @fastify/funky
@@ -116,6 +116,10 @@ app.get('/', (req, reply) => {
   return taskEither.fromEither(either.left(new Error('Invalid state')))
 });
 ```
+
+## License
+
+Licensed under [MIT](./LICENSE).
 
 [npm-image]: https://img.shields.io/npm/v/@fastify/funky.svg
 [npm-url]: https://npmjs.org/package/@fastify/funky
