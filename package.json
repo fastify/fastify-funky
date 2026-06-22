@@ -63,7 +63,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/fastify/fastify-funky.git"
+    "url": "git+https://github.com/fastify/fastify-funky.git"
   },
   "bugs": {
     "url": "https://github.com/fastify/fastify-funky/issues"
